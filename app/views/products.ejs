@@ -18,7 +18,7 @@
         <div class="row m-1 p-4">
             <div class="col">
                 <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
-                    <u>My Todo App</u>
+                    <u>Marketplace App</u>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                             <div class="col col-11 mx-auto">
                                 <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                                     <div class="col">
-                                        <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" name="task" placeholder="Add new Task">
+                                        <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" name="name" placeholder="Add new Product">
                                     </div>
                                     <div class="col-auto px-0 mx-0 mr-2">
                                         <button type="submit" class="btn btn-primary">Add</button>
@@ -48,7 +48,7 @@
                                             <div class="d-flex justify-content-between py-1">
                                                 <div class="d-flex flex-row">
                                                     <div>
-                                                        <%= todo.task %>
+                                                        <%= todo.name %>
                                                             <p class="text-muted"><small>
                                                                     <%= moment(todo.created_at).fromNow() %>
                                                                 </small></p>
@@ -66,7 +66,7 @@
                                         <% }) %>
                                 </ul>
                                 <% } else { %>
-                                    <div class="text-center"><strong>Please add some task.</strong></div>
+                                    <div class="text-center"><strong>Please set a product for sale.</strong></div>
                                     <% }%>
                         </div>
                     </div>

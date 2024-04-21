@@ -6,20 +6,20 @@ const router = express.Router();
 // Home page route
 router.get('/', async (req, res) => {
 
-    const todos = await Product.find()
-    res.render("todos", {
-        tasks: (Object.keys(todos).length > 0 ? todos : {})
+    const products = await Product.find()
+    res.render("products", { // <- this label must match the ejs filename
+        tasks: (Object.keys(products).length > 0 ? products : {})
     });
 });
 
 // POST - Submit Task
 router.post('/', (req, res) => {
     const newTask = new Product({
-        task: req.body.task
+        name: req.body.name
     });
 
     newTask.save()
-    .then(task => res.redirect('/'))
+    .then(name => res.redirect('/'))
     .catch(err => console.log(err));
 });
 
