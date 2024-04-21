@@ -1,19 +1,9 @@
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker compose reference guide at
-# https://docs.docker.com/compose/compose-file/
-
-# Here the instructions define your application as two services called "todo-app" and “todo-database”
-# The service “todo-app” is built from the Dockerfile in the /app directory,
-# and the service “todo-database” uses the official MongoDB image 
-# from Docker Hub - https://hub.docker.com/_/mongo. 
-# You can add other services your application may depend on here.
-
 services:
-  todo-app:
+  marketplace-app:
     build:
       context: ./app
     depends_on:
-      - todo-database
+      - marketplace-mongodb
     environment:
       NODE_ENV: production
     ports:
@@ -27,7 +17,7 @@ services:
           target: /usr/src/app
           action: sync
 
-  todo-database:
+  marketplace-mongodb:
     image: mongo:6
     # comment out for no persist
     volumes:
