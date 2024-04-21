@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-// POST - Submit Task
+// POST - Submit Product for sale
 router.post('/', (req, res) => {
     const newProduct = new Product({
         name: req.body.name,
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     .catch(err => console.log(err));
 });
 
-// POST - Destroy todo item
+// POST - Destroy Product
 router.post('/product/destroy', async (req, res) => {
     // use req.body for POST requests
     const productKey = req.body._key;

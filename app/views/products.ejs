@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body class="bg-dark">
-    <div class="container m-5 p-2 rounded mx-auto bg-dark shadow">
+<body>
+    <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
         
         <!-- App title section -->
         <div class="row m-1 p-4">
@@ -27,11 +27,11 @@
                     <form method="POST" action="/" autocomplete="off">
                         <div class="row m-1 p-3">
                             <div class="col col-11 mx-auto">
-                                <div class="row bg-dark rounded shadow-sm p-2 add-product-wrapper align-items-center justify-content-center">
+                                <div class="row bg-light rounded shadow-sm p-2 add-product-wrapper align-items-center justify-content-center">
                                     <div class="col">
-                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded text-light" type="text" name="name" placeholder="Product Name">
-                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded text-light" type="number" name="price" placeholder="Price">
-                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded text-light" type="text" name="description" placeholder="Description">
+                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded" type="text" name="name" placeholder="Product Name">
+                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded" type="number" name="price" placeholder="Price">
+                                        <input class="form-control form-control-lg border-0 add-product-input bg-transparent rounded" type="text" name="description" placeholder="Description">
                                     </div>
                                     <div class="col-auto px-0 mx-0 mr-2">
                                         <button type="submit" class="btn btn-primary">Add</button>
@@ -56,10 +56,10 @@
                                                         <input type="hidden" name="_key" value="<%= product._id %>" />
                                                     </form>
                                                     <div>
-                                                        <p class="text-light">
+                                                        <p>
                                                            <%= product.name %> 
                                                         </p>
-                                                        <p class="text-light">
+                                                        <p>
                                                             $<%= product.price %> 
                                                         </p>
                                                         <p class="text-muted">
@@ -84,7 +84,7 @@
                                         <% }) %>
                                 </ul>
                                 <% } else { %>
-                                    <div class="text-center text-light"><strong>Please set a product for sale.</strong></div>
+                                    <div class="text-center"><strong>Please set a product for sale.</strong></div>
                                     <% }%>
                         </div>
                     </div>
