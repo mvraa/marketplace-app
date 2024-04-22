@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const products = await Product.find()
 
-    res.render("products", { // <- this label must match the ejs filename
+    res.render("market", { // <- this label must match the ejs filename
         products: (Object.keys(products).length > 0 ? products.sort((a, b) => b.created_at - a.created_at) : {})
     });
 });
@@ -43,5 +43,21 @@ router.get('/details', async (req, res) => {
         product: product,
     });
 });
+
+// GET - Product details
+router.get('/contact', async (req, res) => {
+    res.render("contact");
+});
+
+// GET - Product details
+router.get('/login', async (req, res) => {
+    res.render("login");
+});
+
+// GET - Product details
+router.get('/sell', async (req, res) => {
+    res.render("sell");
+});
+
 
 module.exports = router;
