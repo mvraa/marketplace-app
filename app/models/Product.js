@@ -14,6 +14,14 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
+    category: {
+        type: String,
+        enum: ['electronics', 'clothing', 'home']
+    },
+    image: {
+        data: Buffer,
+        contentType: String
+    },
     created_at: {
         type: Date,
         default: Date.now()

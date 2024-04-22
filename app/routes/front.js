@@ -1,7 +1,20 @@
 const express = require('express');
 const Product = require('../models/Product');
-
 const router = express.Router();
+const path = require('path');
+var fs = require('fs');
+
+// multer - image middleware
+var multer = require('multer');
+var storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads')
+	},
+	filename: (req, file, cb) => {
+		cb(null, file.fieldname + '-' + Date.now())
+	}
+});
+var upload = multer({ storage: storage });
 
 // Home page route
 router.get('/', async (req, res) => {
@@ -10,19 +23,6 @@ router.get('/', async (req, res) => {
     res.render("market", { // <- this label must match the ejs filename
         products: (Object.keys(products).length > 0 ? products.sort((a, b) => b.created_at - a.created_at) : {})
     });
-});
-
-// POST - Submit Product for sale
-router.post('/', (req, res) => {
-    const newProduct = new Product({
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description
-    });
-
-    newProduct.save()
-    .then(name => res.redirect('/'))
-    .catch(err => console.log(err));
 });
 
 // POST - Destroy Product
@@ -57,6 +57,24 @@ router.get('/login', async (req, res) => {
 // GET - Product details
 router.get('/sell', async (req, res) => {
     res.render("sell");
+});
+
+// POST - Submit Product for sale
+router.post('/sell', upload.single('image'), (req, res) => {
+    var obj = {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        category: req.body.category,
+        image: {
+            data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    Product.create(obj);
+
+    res.redirect('/');
 });
 
 

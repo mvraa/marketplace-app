@@ -31,10 +31,15 @@
                 <% products.forEach(product=> { %>
                     <div class="product-card">
                         <a href="/details?_key=<%= product._id %>">
-                            <img src="product1.jpg" alt="<No image>">
+                            <img 
+                                src="data:image/<%=product.image.contentType%>;base64,
+                                    <%=product.image.data.toString('base64')%>" 
+                                alt="<No image>"
+                            />
                             <h2><%= product.name %> </h2>
                             <p><%= product.description %> </p>
                             <span>$<%= product.price %></span>
+                            <p><%= moment(product.created_at).fromNow() %></p>
                         </a>
                     </div>
                 <% }) %>
