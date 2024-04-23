@@ -1,4 +1,4 @@
 import userResolver from './user.resolver.js';
-import bookResolver from './book.resolver.js';
+import productResolver from './product.resolver.js';
 
-export default [userResolver, bookResolver];
+export default [userResolver, productResolver];
