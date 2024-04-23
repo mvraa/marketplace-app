@@ -17,6 +17,26 @@ services:
           target: /usr/src/app
           action: sync
 
+  apollo-app:
+    build:
+      context: ./apollo-app
+    depends_on:
+      - marketplace-mongodb
+    environment:
+      # setting to 'development' enables the apollo playground,
+      # if set to 'production' we can only use curl
+      NODE_ENV: development
+    ports:
+      - 4000:4000
+      - 35730:35730
+    develop:
+      watch:
+        - path: ./apollo-app/package.json
+          action: rebuild
+        - path: ./apollo-app
+          target: /usr/src/apollo-app
+          action: sync
+
   marketplace-mongodb:
     image: mongo:6
     # comment out for no persist
