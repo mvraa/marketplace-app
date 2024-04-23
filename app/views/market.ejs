@@ -41,6 +41,13 @@
                             <span>$<%= product.price %></span>
                             <p><%= moment(product.created_at).fromNow() %></p>
                         </a>
+                        <a href="javascript:;" onclick="this.children[0].submit()"
+                            class="text-danger">
+                            <form method="POST" action="/product/destroy">
+                                <input type="hidden" name="_key" value="<%= product._id %>" />
+                            </form>
+                            <i class="fa fa-trash-o"></i>
+                        </a>
                     </div>
                 <% }) %>
             <% } else { %>
