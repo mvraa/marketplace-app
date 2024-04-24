@@ -24,7 +24,7 @@ services:
       - marketplace-mongodb
     environment:
       # setting to 'development' enables the apollo playground,
-      # if set to 'production' we can only use curl
+      # if set to 'production' we must use curl
       NODE_ENV: development
     ports:
       - 4000:4000
