@@ -9,7 +9,7 @@ body {
     background-color: #f9f9f9;
 }
 
-button {
+.button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -19,7 +19,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.button:hover {
     background-color: #0056b3;
 }
 
@@ -169,20 +169,6 @@ footer {
     margin-bottom: 1rem;
 }
 
-.product-details .buy-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.product-details .buy-button:hover {
-    background-color: #0056b3;
-}
-
 /* login */
 
 .login-container {
@@ -231,4 +217,15 @@ footer {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/* user information */
+
+.user-info {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

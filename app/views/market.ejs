@@ -19,9 +19,9 @@
     <!-- Main Content Section -->
     <main>
         <div class="intro">
-            <h1>Welcome to Our Marketplace</h1>
-            <p>Discover amazing products from various sellers.</p>
-            <button>Explore</button>
+            <h1>Welcome to Our Marketplace<%= user ? " " + user.displayName : "" %></h1>
+            <p>Please login to list a product.</p>
+            <input type="button" href="/login" class="button" value="Login"/>
         </div>
 
         <!-- Featured Products -->

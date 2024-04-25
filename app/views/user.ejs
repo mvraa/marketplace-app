@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/market.css"> <!-- Link to your CSS file -->
+    <title>Product Details</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <%- include('partials/header.ejs') %>
+
+    <!-- Main Content Section -->
+    <main>
+        <div class="user-info">
+            <h1>Welcome <%=  user.displayName %>!</h1>
+            <p>Email: <% user.displayEmail %></p>
+            <!-- Display user-specific information here -->
+            <!-- Example: <p>Email: john@example.com</p> -->
+            <input type="button" href="/user" class="logout-btn" value="Logout">
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

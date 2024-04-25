@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
 
     res.render('market', { // <- this label must match the ejs filename
         products: (Object.keys(products).length > 0 ? products.sort((a, b) => b.created_at - a.created_at) : {}),
+        user: req.user
     });
 });
 
@@ -34,22 +35,35 @@ router.get('/details', async (req, res) => {
 
     res.render('details', {
         product: product,
+        user: req.user
     });
 });
 
 // GET - Product details
 router.get('/contact', async (req, res) => {
-    res.render('contact');
+    res.render('contact', {
+        user: req.user
+    });
 });
 
 // GET - Product details
 router.get('/sell', isLoggedIn, (req, res) => {
-    res.render('sell');
+    res.render('sell', {
+        user: req.user
+    });
 });
 
 // GET - Product details
 router.get('/login', async (req, res) => {
-    res.render('login');
+    res.render('login', {
+        user: req.user
+    });
+});
+
+router.get('/user', isLoggedIn, (req, res) => {
+    res.render('user', {
+        user: req.user
+    });
 });
 
 // POST - Submit Product for sale
@@ -85,7 +99,9 @@ function isLoggedIn(req, res, next){
 }
 
 router.get('/auth/google', 
-    passport.authenticate('google', {scope: ['email', 'profile']})
+    passport.authenticate('google', {
+        scope: ['email', 'profile']
+    })
 );
 
 router.get('/google/callback', 
@@ -103,7 +119,7 @@ router.get('/protected', isLoggedIn, (req, res) => {
     res.send(`Hello ${req.user.displayName}`);
 });
 
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
     req.logout(req.user, err => {
         if(err) return next(err);
         res.redirect("/");

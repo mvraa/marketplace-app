@@ -4,6 +4,11 @@
         <a href="../">Products</a>
         <a href="../sell">Sell</a>
         <a href="../contact">Contact</a>
-        <a href="../login">Login</a>
+        <% if(user) { %>
+            <a href="../logout">Logout</a>
+            <a href="../user"><%= user.displayName %></a>
+        <% } else{ %>
+            <a href="../login">Login</a>
+        <% } %>
     </nav>
 </header>
