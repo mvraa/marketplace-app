@@ -194,6 +194,24 @@ footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.google-button {
+    background-color: #4285F4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.google-button img {
+    margin-right: 10px;
+}
+.google-button:hover {
+    background-color: #3367D6;
+}
+
 /* contact */
 
 .input-container form {

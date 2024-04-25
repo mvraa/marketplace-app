@@ -1,11 +1,49 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const mongoose = require('mongoose');
 const bodyParse = require('body-parser');
 const livereload = require('livereload');
 const connectLiveReload = require('connect-livereload');
 const express = require('express');
+const session = require('express-session');
+
+const passport = require('passport');
+
 const app = express();
+app.use(session({secret: "mysecret"}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 const moment = require('moment');
 const path = require('path');
+
+//////////////////LOGIN///////////////////
+
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+
+passport.use(new GoogleStrategy({
+        clientID: "965143378167-fd6p1o5qleg5mprmgvjqefi0189rc2dv.apps.googleusercontent.com",
+        clientSecret: "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",
+        callbackURL: 'http://localhost:3000/google/callback',
+        passReqToCallback: true
+    },
+    function(request, accessToken, refreshToken, profile, done) {
+        // User.findOrCreate({googleId: profile.id}, function(err, user){
+            return done(null, profile);//user);
+        // });
+    }
+));
+
+passport.serializeUser(function(user, done){
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done){
+    done(null, user);
+});
+
+///////////////////////////
 
 // Live Reload configuration
 const liveReloadServer = livereload.createServer();

@@ -3,6 +3,7 @@ const Product = require('../models/Product');
 const router = express.Router();
 const path = require('path');
 var fs = require('fs');
+const passport = require('passport');
 
 // multer - image middleware
 var multer = require('multer');
@@ -20,17 +21,9 @@ var upload = multer({ storage: storage });
 router.get('/', async (req, res) => {
     const products = await Product.find()
 
-    res.render("market", { // <- this label must match the ejs filename
-        products: (Object.keys(products).length > 0 ? products.sort((a, b) => b.created_at - a.created_at) : {})
+    res.render('market', { // <- this label must match the ejs filename
+        products: (Object.keys(products).length > 0 ? products.sort((a, b) => b.created_at - a.created_at) : {}),
     });
-});
-
-// POST - Destroy Product
-router.post('/product/destroy', async (req, res) => {
-    // use req.body for POST requests
-    const productKey = req.body._key;
-    const err = await Product.findOneAndRemove({_id: productKey})
-    res.redirect('/');
 });
 
 // GET - Product details
@@ -39,24 +32,24 @@ router.get('/details', async (req, res) => {
     const productKey = req.query._key;
     const product = await Product.findById(productKey)
 
-    res.render("details", {
+    res.render('details', {
         product: product,
     });
 });
 
 // GET - Product details
 router.get('/contact', async (req, res) => {
-    res.render("contact");
+    res.render('contact');
+});
+
+// GET - Product details
+router.get('/sell', isLoggedIn, (req, res) => {
+    res.render('sell');
 });
 
 // GET - Product details
 router.get('/login', async (req, res) => {
-    res.render("login");
-});
-
-// GET - Product details
-router.get('/sell', async (req, res) => {
-    res.render("sell");
+    res.render('login');
 });
 
 // POST - Submit Product for sale
@@ -75,6 +68,46 @@ router.post('/sell', upload.single('image'), (req, res) => {
     Product.create(obj);
 
     res.redirect('/');
+});
+
+// POST - Destroy Product
+router.post('/product/destroy', async (req, res) => {
+    // use req.body for POST requests
+    const productKey = req.body._key;
+    const err = await Product.findOneAndRemove({_id: productKey})
+    res.redirect('/');
+});
+
+//////////////////LOGIN////////////////////
+
+function isLoggedIn(req, res, next){
+    req.user ? next() : res.sendStatus(401);
+}
+
+router.get('/auth/google', 
+    passport.authenticate('google', {scope: ['email', 'profile']})
+);
+
+router.get('/google/callback', 
+    passport.authenticate('google', {
+        successRedirect: '/',
+        failureRedirect: '/auth/failure'
+    })
+);
+
+router.get('/auth/failure', (req, res) => {
+    res.send("Something went wrong!")
+})
+
+router.get('/protected', isLoggedIn, (req, res) => {
+    res.send(`Hello ${req.user.displayName}`);
+});
+
+router.get("/logout", (req, res) => {
+    req.logout(req.user, err => {
+        if(err) return next(err);
+        res.redirect("/");
+    });
 });
 
 
