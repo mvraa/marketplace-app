@@ -2,6 +2,8 @@
 
 ## Signup (Create User)
 
+The operation name is important. The specific operations `CreateUser` and `Login` are allowed without a jwt.
+
 Operation:
 
 ```
@@ -59,11 +61,14 @@ Operation:
 ```
 mutation Login($input: AuthInput) {
   login(input: $input) {
-    _id
-    userJwt {
-      token
+    __typename
+    ... on AuthResponse{
+      _id
+      username
+      userJwt {
+        token
+      }
     }
-    username
   }
 }
 ```

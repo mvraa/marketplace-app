@@ -5,6 +5,17 @@ import throwCustomError, {
 } from '../helpers/error-handler.helper.js';
 import { GraphQLError } from 'graphql';
 
+function jwtSignature(user){
+  return jwt.sign({ 
+      userId: user._id,
+      username: user.username
+    },
+    process.env.JWT_PRIVATE_KEY, {
+      expiresIn: process.env.TOKEN_EXPIRY_TIME
+    }
+  );
+}
+
 const userResolver = {
   Query: {
     getUsers: async (_, { total }, contextValue) => {
@@ -38,16 +49,7 @@ const userResolver = {
       });
 
       const user = await userToCreate.save();
-      const token = jwt.sign(
-        { 
-          userId: user._id,
-          username: user.username
-        },
-        process.env.JWT_PRIVATE_KEY,
-        {
-          expiresIn: process.env.TOKEN_EXPIRY_TIME
-        }
-      );
+      const token = jwtSignature(user);
 
       return {
         __typename: 'AuthResponse',
@@ -62,17 +64,9 @@ const userResolver = {
       const user = await UserModel.findOne({
         $and: [{ username: username }, { password: password }],
       });
+      
       if (user) {
-        const token = jwt.sign(
-          {
-            userId: user._id,
-            username: user.username
-          },
-          process.env.JWT_PRIVATE_KEY,
-          {
-            expiresIn: process.env.TOKEN_EXPIRY_TIME
-          }
-        );
+        const token = jwtSignature(user);
 
         return {
           ...user.toObject(),

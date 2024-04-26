@@ -8,6 +8,8 @@ const productTypeDefs = gql`
     description: String
     category: String
     image: String
+    sellerId: String
+    sellerName: String
   }
 `;
 export default productTypeDefs;

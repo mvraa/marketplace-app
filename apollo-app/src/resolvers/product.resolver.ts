@@ -6,7 +6,7 @@ import throwCustomError, {
 const productResolver = {
   Query: {
     // get product by id
-    product: async (parent, { id }, contextValue) => {
+    product: async (parent, { id }, context) => {
       const product = await ProductModel.findById(id);
       if (!product) {
         throwCustomError(
@@ -21,7 +21,7 @@ const productResolver = {
     },
 
     // get all products
-    async getProducts(parent, args, contextValue) {
+    async getProducts(parent, args, context) {
       const amount = args.amount;
       const allProducts = await ProductModel.find()
         .sort({ createdAt: -1 })
@@ -34,15 +34,17 @@ const productResolver = {
     // create product
     createProduct: async (
       parent,
-      { productInput: { name, price, description, category, image } },
-      contextValue
+      { productInput: { name, price, description, category } },
+      context
     ) => {
       const productToCreate = new ProductModel({
         name: name,
         price: price,
         description: description,
         category: category,
-        image: "none"
+        image: "none",
+        sellerId: context.user.userId,
+        sellerName: context.user.username
       });
       const res = await productToCreate.save();
       return {
@@ -52,7 +54,7 @@ const productResolver = {
     },
 
     // delete product
-    deleteProduct: async (_, { id }, contextValue) => {
+    deleteProduct: async (_, { id }, context) => {
       const isDeleted = (await ProductModel.deleteOne({ _id: id })).deletedCount;
       return {
         isSuccess: isDeleted,
@@ -63,7 +65,7 @@ const productResolver = {
     // edit product
     editProduct: async (
       _,
-      { id, productInput: { name, price, description, category, image } },
+      { id, productInput: { name, price, description, category } },
       { user }
     ) => {
       const isEdited = (
@@ -74,7 +76,6 @@ const productResolver = {
             price: price,
             description: description,
             category: category,
-            image: "none"
           }
         )
       ).modifiedCount;

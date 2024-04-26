@@ -1,12 +1,11 @@
 import gql from 'graphql-tag';
 
-const bookSchema = gql`
+const productSchema = gql`
   input ProductInput {
     name: String
     price: Int
     description: String
     category: String
-    image: String
   }
 
   # union SingleProductResult = Product | NotExistsError
@@ -28,4 +27,4 @@ const bookSchema = gql`
   }
 `;
 
-export default bookSchema;
+export default productSchema;

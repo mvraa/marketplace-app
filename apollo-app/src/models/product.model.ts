@@ -23,6 +23,12 @@ const ProductSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now()
+  },
+  sellerId: {
+    type: String
+  },
+  sellerName: {
+    type: String
   }
 });
 
