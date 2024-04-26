@@ -21,7 +21,7 @@
         <div class="intro">
             <h1>Welcome to Our Marketplace<%= user ? " " + user.displayName : "" %></h1>
             <p>Please login to list a product.</p>
-            <input type="button" href="/login" class="button" value="Login"/>
+            <a type="button" href="/login" class="button">Login</a>
         </div>
 
         <!-- Featured Products -->
@@ -46,13 +46,15 @@
                             <span>$<%= product.price %></span>
                             <p><%= moment(product.created_at).fromNow() %></p>
                         </a>
-                        <a href="javascript:;" onclick="this.children[0].submit()"
-                            class="text-danger">
-                            <form method="POST" action="/product/destroy">
-                                <input type="hidden" name="_key" value="<%= product._id %>" />
-                            </form>
-                            <i class="fa fa-trash-o"></i>
-                        </a>
+                        <% if(user && user.id == product.sellerId) { %>
+                            <a href="javascript:;" onclick="this.children[0].submit()"
+                                class="text-danger">
+                                <form method="POST" action="/product/destroy">
+                                    <input type="hidden" name="_key" value="<%= product._id %>" />
+                                </form>
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        <% } %>
                     </div>
                 <% }) %>
             <% } else { %>

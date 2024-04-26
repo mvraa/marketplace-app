@@ -76,7 +76,9 @@ router.post('/sell', upload.single('image'), (req, res) => {
         image: {
             data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
             contentType: 'image/png'
-        }
+        },
+        sellerId: req.user.id,
+        sellerName: req.user.displayName
     }
 
     Product.create(obj);
