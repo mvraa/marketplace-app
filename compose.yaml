@@ -37,6 +37,24 @@ services:
           target: /usr/src/apollo-app
           action: sync
   
+  message-service:
+    build:
+      context: ./message-service
+    depends_on:
+      - rabbit-server
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000:5000
+      - 35731:35731
+    develop:
+      watch:
+        - path: ./message-service/package.json
+          action: rebuild
+        - path: ./message-service
+          target: /usr/src/message-service
+          action: sync
+  
   rabbit-server:
     build:
       context: ./rmq-server
