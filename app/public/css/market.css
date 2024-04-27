@@ -59,6 +59,11 @@ input {
     font-size: 1.5rem;
     text-decoration: none;
     color: #fff;
+    
+}
+
+.logo img:hover {
+    box-shadow: none;
 }
 
 .logo img {
@@ -67,6 +72,8 @@ input {
     height: auto;
     display: block;
     margin: 0 auto;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px black;
 }
 
 .user-logo img {
@@ -117,11 +124,13 @@ main {
     padding: 1rem;
     margin-bottom: 1rem;
     width: calc(25% - 1rem);
+    box-shadow: 0 2px 4px black;
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
+    border-radius: 5px;
 }
 
 .product-card h2 {
@@ -166,6 +175,7 @@ footer {
 .product-details img {
     max-width: 100%;
     margin-bottom: 1rem;
+    border-radius: 5px;
 }
 
 .product-details h1 {
