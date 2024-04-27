@@ -1,13 +1,18 @@
 <header class="header">
-    <a href="../" class="logo">Marketplace</a>
+    <a href="../" class="logo">
+        <img src="img/icon.jpg" alt="Marketplace Logo">
+    </a>
     <nav class="nav-items">
         <a href="../">Products</a>
         <a href="../sell">Sell</a>
         <a href="../contact">Contact</a>
         <a href="http://localhost:4000/" target="_blank">Apollo</a>
+        <a href="http://localhost:15672/" target="_blank">Rabbit</a>
         <% if(user) { %>
             <a href="../logout">Logout</a>
-            <a href="../user"><%= user.displayName %></a>
+            <a href="../user" class="user-logo">
+                <img src="<%= user.picture %>" alt="<%= user.displayName %>">
+            </a>
         <% } else{ %>
             <a href="../login">Login</a>
         <% } %>

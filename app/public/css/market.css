@@ -61,6 +61,22 @@ input {
     color: #fff;
 }
 
+.logo img {
+    max-width: 60px;
+    border-radius: 30px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.user-logo img {
+    max-width: 40px;
+    border-radius: 20px;
+    height: auto;
+    display: inline;
+    margin: 0 auto;
+}
+
 .nav-items a {
     text-decoration: none;
     color: #fff;
@@ -90,7 +106,8 @@ main {
 /* Featured products styles */
 .featured-products {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 1rem; /* equal spacing - even if last row has fewer elements */
     flex-wrap: wrap;
 }
 
@@ -99,7 +116,7 @@ main {
     border: 1px solid #ddd;
     padding: 1rem;
     margin-bottom: 1rem;
-    width: calc(50% - 1rem);
+    width: calc(25% - 1rem);
 }
 
 .product-card img {
