@@ -35,8 +35,8 @@ router.post('/test', async (req, res) => {
             // declare a queue and dummy message
             // sevice complains if we try to send to 
             // a default queue created using the rabbitmq gui
-            var queue = 'myq3'; 
-            var msg = 'Hello World!';
+            var queue = req.body.sellerId; 
+            var msg = req.body.msg;
 
             // create queue if it doesn't already exist
             channel.assertQueue(queue, {
@@ -50,7 +50,7 @@ router.post('/test', async (req, res) => {
         // close the connection and exit
         setTimeout(function() {
             connection.close();
-            process.exit(0);
+            //process.exit(0);
         }, 500);
     });
 
